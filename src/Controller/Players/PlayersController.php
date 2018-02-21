@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Controller\Teams;
+namespace App\Controller\Players;
 
-use App\Entity\Teams;
+use App\Entity\Players;
 use App\Controller\AbstractController;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class TeamsController.
+ * Class PlayersController.
  */
-class TeamsController extends AbstractController
+class PlayersController extends AbstractController
 {
-	const ENTITY = Teams::class;
+	const ENTITY = Players::class;
 
 	/**
-	 * @Route("/teams", name="teams")
+	 * @Route("/players", name="players")
 	 *
 	 * @param Criteria $criteria
 	 *
 	 * @return JsonResponse
 	 */
-	public function getTeams(Criteria $criteria): JsonResponse
+	public function getPlayers(Criteria $criteria): JsonResponse
 	{
 		return $this->getAction($criteria);
 	}
