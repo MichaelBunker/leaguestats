@@ -24,5 +24,14 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+## LeagueStats Defined ##
+    app.request.validator:
+        class: App\Util\Validator\RequestValidator
+    App\Util\Validator\RequestValidator: '@app.request.validator'
+
+    leaguestats.request_validation_listener:
+        class: App\EventListener\RequestListener
+        arguments:
+            - '@app.request.validator'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller_arguments, method: onKernelController }
