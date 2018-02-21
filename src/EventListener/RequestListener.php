@@ -3,7 +3,6 @@
 namespace App\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerArgumentsEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use App\Util\Validator\RequestValidator;
 
 /**
@@ -79,16 +78,6 @@ class RequestListener
 		);
 
 		return $validator ? $validator : false;
-	}
-
-	/**
-	 * Get subscribed events for listener.
-	 *
-	 * @return array
-	 */
-	public static function getSubscribedEvents(): array
-	{
-		return [KernelEvents::CONTROLLER => 'onKernelController'];
 	}
 
 	/**
