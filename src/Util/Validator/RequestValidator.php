@@ -5,6 +5,7 @@ namespace App\Util\Validator;
 use App\Util\ValueConverter\ConverterManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\Constraint;
@@ -116,11 +117,11 @@ class RequestValidator
 	 *
 	 * @param ClassMetadata $classMetadata
 	 * @param string        $validatorClass
-	 * @param array         $arguments
+	 * @param ParameterBag  $arguments
 	 *
 	 * @return void
 	 */
-	protected function setRequestValues(ClassMetadata $classMetadata, $validatorClass, array $arguments)
+	protected function setRequestValues(ClassMetadata $classMetadata, $validatorClass, ParameterBag $arguments)
 	{
 		$values = $arguments->all();
 		$fields = $classMetadata->getFieldNames();

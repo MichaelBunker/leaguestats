@@ -4,8 +4,8 @@ namespace App\Controller\Teams;
 
 use App\Entity\Teams;
 use App\Controller\AbstractController;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,12 +18,12 @@ class TeamsController extends AbstractController
 	/**
 	 * @Route("/teams", name="teams")
 	 *
-	 * @param Request $request
+	 * @param Criteria $criteria
 	 *
 	 * @return JsonResponse
 	 */
-	public function getTeams(Request $request)
+	public function getTeams(Criteria $criteria)
 	{
-		return $this->getAction($request);
+		return $this->getAction($criteria);
 	}
 }

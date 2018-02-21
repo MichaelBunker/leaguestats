@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -27,14 +26,13 @@ abstract class AbstractController extends Controller
 	/**
 	 * Get action.
 	 *
-	 * @param Request $request
+	 * @param Criteria $criteria
 	 *
 	 * @return JsonResponse
 	 */
-	public function getAction(Request $request): JsonResponse
+	public function getAction(Criteria $criteria): JsonResponse
 	{
-		$criteria = $this->createCriteria($request);
-		$records  = $this->fetchRecords($criteria);
+		$records = $this->fetchRecords($criteria);
 
 		return $this->createResponse($records, Response::HTTP_OK, ['Access-Control-Allow-Origin' => '*']);
 	}
@@ -92,21 +90,6 @@ abstract class AbstractController extends Controller
 	protected function fetchRecords(Criteria $criteria): Collection
 	{
 		return $this->getDoctrine()->getRepository($this::ENTITY)->matching($criteria);
-	}
-
-	/**
-	 * Create Criteria object for request.
-	 *
-	 * @param Request $request
-	 *
-	 * @return Criteria
-	 */
-	protected function createCriteria(Request $request): Criteria
-	{
-		/** @var \App\Util\Visitor\RequestVisitor $requestVisitor */
-		$requestVisitor = $this->get('App\Util\Visitor\RequestVisitor');
-
-		return $requestVisitor->create($request);
 	}
 
 	/**
