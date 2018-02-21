@@ -7,65 +7,65 @@ namespace App\Util\ValueConverter;
  */
 class ConverterManager
 {
-    /**
-     * @var StringConverter
-     */
-    protected $string;
+	/**
+	 * @var StringConverter
+	 */
+	protected $string;
 
-    /**
-     * @var IntegerConverter
-     */
-    protected $integer;
+	/**
+	 * @var IntegerConverter
+	 */
+	protected $integer;
 
-    /**
-     * @var FloatConverter
-     */
-    protected $float;
+	/**
+	 * @var FloatConverter
+	 */
+	protected $float;
 
-    /**
-     * @var BooleanConverter
-     */
-    protected $boolean;
+	/**
+	 * @var BooleanConverter
+	 */
+	protected $boolean;
 
-    function __construct(
-        StringConverter $stringConverter,
-        IntegerConverter $integerConverter,
-        FloatConverter $floatConverter,
-        BooleanConverter $booleanConverter
-    ) {
-        $this->string = $stringConverter;
-        $this->integer = $integerConverter;
-        $this->float = $floatConverter;
-        $this->boolean = $booleanConverter;
-    }
+	function __construct(
+		StringConverter $stringConverter,
+		IntegerConverter $integerConverter,
+		FloatConverter $floatConverter,
+		BooleanConverter $booleanConverter
+	) {
+		$this->string = $stringConverter;
+		$this->integer = $integerConverter;
+		$this->float = $floatConverter;
+		$this->boolean = $booleanConverter;
+	}
 
-    /**
-     * Convert given value.
-     *
-     * @param mixed $type
-     * @param mixed $value
-     *
-     * @return mixed
-     */
-    public function convert($type, $value)
-    {
-        $converter = strtolower($type);
-        $this->validateType($converter);
+	/**
+	 * Convert given value.
+	 *
+	 * @param mixed $type
+	 * @param mixed $value
+	 *
+	 * @return mixed
+	 */
+	public function convert($type, $value)
+	{
+		$converter = strtolower($type);
+		$this->validateType($converter);
 
-        return $this->$converter->convert($value);
-    }
+		return $this->$converter->convert($value);
+	}
 
-    /**
-     * Validate type.
-     *
-     * @param mixed $type
-     *
-     * @return boolean
-     */
-    protected function validateType($type)
-    {
-        $converters = get_object_vars($this);
+	/**
+	 * Validate type.
+	 *
+	 * @param mixed $type
+	 *
+	 * @return boolean
+	 */
+	protected function validateType($type)
+	{
+		$converters = get_object_vars($this);
 
-        return in_array($type, $converters);
-    }
+		return in_array($type, $converters);
+	}
 }

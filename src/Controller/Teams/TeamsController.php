@@ -8,17 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TeamsController extends AbstractController
 {
-    const ENTITY = Teams::class;
+	const ENTITY = Teams::class;
 
-    /**
-     * @Route("/teams", name="teams")
-     */
-    public function getTeams()
-    {
-        $data = $this->getDoctrine()->getRepository(Teams::class)->findAll();
+	/**
+	 * @Route("/teams", name="teams")
+	 */
+	public function getTeams()
+	{
+		$data = $this->getDoctrine()->getRepository(Teams::class)->findAll();
 
-        return $this->json([
-            'message' => $data,
-        ]);
-    }
+		return $this->json([
+			'message' => $data,
+		]);
+	}
 }

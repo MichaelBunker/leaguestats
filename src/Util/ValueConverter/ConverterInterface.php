@@ -7,12 +7,12 @@ namespace App\Util\ValueConverter;
  */
 interface ConverterInterface
 {
-    /**
-     * Normalize data.
-     *
-     * @param mixed $data
-     *
-     * @return mixed
-     */
-    public function convert($data);
+	/**
+	 * Normalize data.
+	 *
+	 * @param mixed $data
+	 *
+	 * @return mixed
+	 */
+	public function convert($data);
 }

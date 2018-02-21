@@ -7,40 +7,40 @@ namespace App\Util\ValueConverter;
  */
 class IntegerConverter implements ConverterInterface
 {
-    /**
-     * Convert value to integer.
-     *
-     * @param mixed $data
-     *
-     * @return integer|null
-     *
-     * @throws \UnexpectedValueException If value cannot be converted.
-     */
-    public function convert($data)
-    {
-        if (!$this->canConvert($data)) {
-            throw new \UnexpectedValueException('Can\'t convert value given');
-        }
+	/**
+	 * Convert value to integer.
+	 *
+	 * @param mixed $data
+	 *
+	 * @return integer|null
+	 *
+	 * @throws \UnexpectedValueException If value cannot be converted.
+	 */
+	public function convert($data)
+	{
+		if (!$this->canConvert($data)) {
+			throw new \UnexpectedValueException('Can\'t convert value given');
+		}
 
-        if (is_null($data)) {
-            return null;
-        }
+		if (is_null($data)) {
+			return null;
+		}
 
-        return intval($data);
-    }
+		return intval($data);
+	}
 
-    /**
-     * Check if data can be converted.
-     *
-     * @param mixed $data
-     *
-     * @return boolean
-     */
-    protected function canConvert($data)
-    {
-        return is_null($data)
-            || ctype_digit($data)
-            || is_numeric($data)
-            || is_int($data);
-    }
+	/**
+	 * Check if data can be converted.
+	 *
+	 * @param mixed $data
+	 *
+	 * @return boolean
+	 */
+	protected function canConvert($data)
+	{
+		return is_null($data)
+			|| ctype_digit($data)
+			|| is_numeric($data)
+			|| is_int($data);
+	}
 }

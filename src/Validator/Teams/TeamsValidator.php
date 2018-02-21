@@ -9,18 +9,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class TeamsValidator
 {
-    /**
-     * @Assert\Type("string")
-     */
-    public $organization;
+	/**
+	 * @Assert\Type("string")
+	 */
+	public $organization;
 
-    /**
-     * @Assert\Type("string")
-     */
-    public $abbr;
+	/**
+	 * @Assert\Type("string")
+	 */
+	public $abbr;
 
-    /**
-     * @Assert\Type("string")
-     */
-    public $region;
+	/**
+	 * @Assert\Type("string")
+	 */
+	public $region;
 }
