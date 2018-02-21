@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.1.3",
         "ext-iconv": "*",
+        "eloquent/enumeration": "^5.1",
         "symfony/console": "^4.0",
         "symfony/dependency-injection": "^4.0",
         "symfony/flex": "^1.0",

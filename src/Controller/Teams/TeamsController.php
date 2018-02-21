@@ -4,6 +4,8 @@ namespace App\Controller\Teams;
 
 use App\Entity\Teams;
 use App\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TeamsController extends AbstractController
@@ -12,13 +14,13 @@ class TeamsController extends AbstractController
 
 	/**
 	 * @Route("/teams", name="teams")
+	 *
+	 * @param Request $request
+	 *
+	 * @return JsonResponse
 	 */
-	public function getTeams()
+	public function getTeams(Request $request)
 	{
-		$data = $this->getDoctrine()->getRepository(Teams::class)->findAll();
-
-		return $this->json([
-			'message' => $data,
-		]);
+		return $this->getAction($request);
 	}
 }

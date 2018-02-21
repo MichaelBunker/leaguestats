@@ -19,3 +19,10 @@ services:
     App\EventListener\RequestListener:
         tags:
             - { name: kernel.event_listener, event: kernel.controller_arguments, method: onKernelController }
+    App\Util\Visitor\RequestVisitor:
+        public: true
+        class: App\Util\Visitor\RequestVisitor
+        arguments:
+            - '@expression.builder'
+    expression.builder:
+        class: Doctrine\Common\Collections\ExpressionBuilder

@@ -3,12 +3,31 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\SqlResultSetMapping;
+use Doctrine\ORM\Mapping\SqlResultSetMappings;
+use Doctrine\ORM\Mapping\EntityResult;
+use Doctrine\ORM\Mapping\FieldResult;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * Entity representing an LCS Team.
  *
  * @ORM\Entity
  * @ORM\Table(name="teams")
+ * @SqlResultSetMappings({
+ *      @SqlResultSetMapping(
+ *          name = "results",
+ *          entities= {
+ *              @EntityResult(
+ *                  entityClass = "__CLASS__",
+ *                  fields      = {
+ *                      @FieldResult(name = "organization"),
+ *                      @FieldResult(name = "abbr"),
+ *                      @FieldResult(name = "region"),
+ *                  }
+ *              )
+ *          }
+ *      )
+ * })
  */
 class Teams
 {
@@ -27,7 +46,7 @@ class Teams
 	 * Team organization.
 	 *
 	 * @var string
-	 *
+	 * @Groups({"public"})
 	 * @ORM\Column(type="string", length=100)
 	 */
 	private $organization;
@@ -36,7 +55,7 @@ class Teams
 	 * Abbreviation.
 	 *
 	 * @var string
-	 *
+	 * @Groups({"public"})
 	 * @ORM\Column(type="string")
 	 */
 	private $abbr;
@@ -45,7 +64,7 @@ class Teams
 	 * Region team plays in.
 	 *
 	 * @var string
-	 *
+	 * @Groups({"public"})
 	 * @ORM\Column(type="string", length=10)
 	 */
 	private $region;
