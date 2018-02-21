@@ -40,8 +40,8 @@ class RequestValidator
 	 */
 	public function __construct(ValidatorInterface $validator, EntityManagerInterface $entityManager, ConverterManager $converterManager)
 	{
-		$this->validator = $validator;
-		$this->entityManager = $entityManager;
+		$this->validator        = $validator;
+		$this->entityManager    = $entityManager;
 		$this->converterManager = $converterManager;
 	}
 
@@ -68,8 +68,8 @@ class RequestValidator
 	/**
 	 * Validate request fields.
 	 *
-	 * @param ClassMetadata  $classMetadata
-	 * @param Request $request
+	 * @param ClassMetadata $classMetadata
+	 * @param Request       $request
 	 *
 	 * @return void
 	 *
@@ -77,8 +77,8 @@ class RequestValidator
 	 */
 	protected function validateFields(ClassMetadata $classMetadata, Request $request)
 	{
-		$entityFields = $classMetadata->getFieldNames();
-		$requestFields   = array_keys($request->query->all());
+		$entityFields  = $classMetadata->getFieldNames();
+		$requestFields = array_keys($request->query->all());
 
 		foreach ($requestFields as $field) {
 			if (!in_array($field, $entityFields)) {
@@ -100,7 +100,7 @@ class RequestValidator
 	 */
 	protected function validateRequestParameters(ClassMetadata $classMetadata, $validator, Request $request)
 	{
-		$validatorClass  = new $validator;
+		$validatorClass = new $validator;
 
 		$this->setRequestValues($classMetadata, $validatorClass, $request->query);
 		$errors = $this->validator->validate($validatorClass, null, [$request->getMethod(), Constraint::DEFAULT_GROUP]);
@@ -120,7 +120,7 @@ class RequestValidator
 	 *
 	 * @return void
 	 */
-	protected function setRequestValues(ClassMetadata $classMetadata, $validatorClass, $arguments)
+	protected function setRequestValues(ClassMetadata $classMetadata, $validatorClass, array $arguments)
 	{
 		$values = $arguments->all();
 		$fields = $classMetadata->getFieldNames();
@@ -197,7 +197,7 @@ class RequestValidator
 	 *
 	 * @return void
 	 */
-	protected function setValidatorValues($validatorClass, $objType, $value, $field)
+	protected function setValidatorValues(object $validatorClass, $objType, $value, $field)
 	{
 		$validatorClass->$field = $this->converterManager->convert($objType, $value);
 	}

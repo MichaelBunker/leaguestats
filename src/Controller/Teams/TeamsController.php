@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class TeamsController.
+ */
 class TeamsController extends AbstractController
 {
 	const ENTITY = Teams::class;

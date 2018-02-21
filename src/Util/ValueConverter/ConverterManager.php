@@ -27,15 +27,23 @@ class ConverterManager
 	 */
 	protected $boolean;
 
-	function __construct(
+	/**
+	 * ConverterManager constructor.
+	 *
+	 * @param StringConverter  $stringConverter
+	 * @param IntegerConverter $integerConverter
+	 * @param FloatConverter   $floatConverter
+	 * @param BooleanConverter $booleanConverter
+	 */
+	public function __construct(
 		StringConverter $stringConverter,
 		IntegerConverter $integerConverter,
 		FloatConverter $floatConverter,
 		BooleanConverter $booleanConverter
 	) {
-		$this->string = $stringConverter;
+		$this->string  = $stringConverter;
 		$this->integer = $integerConverter;
-		$this->float = $floatConverter;
+		$this->float   = $floatConverter;
 		$this->boolean = $booleanConverter;
 	}
 

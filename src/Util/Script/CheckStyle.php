@@ -19,7 +19,7 @@ class CheckStyle
 	public static function execute(Event $event)
 	{
 		$result = null;
-		exec('vendor/bin/phpcs --standard=LeagueLineCS.xml --colors -s --extensions=php src/', $result);
+		exec('vendor/bin/phpcs --standard=leaguestatsCS.xml --colors -s --extensions=php src/', $result);
 
 		$result > 0 ? $event->getIO()->write($result) : $event->getIO()->write('<info>No check style errors.</info>' . PHP_EOL);
 	}

@@ -17,6 +17,7 @@
 		"symfony/yaml": "^4.0"
 	},
 	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.2",
 		"symfony/debug-pack": "^1.0",
 		"symfony/dotenv": "^4.0",
 		"symfony/maker-bundle": "^1.1",

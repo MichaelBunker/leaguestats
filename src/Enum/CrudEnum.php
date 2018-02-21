@@ -14,8 +14,8 @@ use Eloquent\Enumeration\AbstractEnumeration;
  */
 class CrudEnum extends AbstractEnumeration
 {
-    const CREATE = 'create';
-    const READ   = 'read';
-    const UPDATE = 'update';
-    const DELETE = 'delete';
+	const CREATE = 'create';
+	const READ   = 'read';
+	const UPDATE = 'update';
+	const DELETE = 'delete';
 }

@@ -115,13 +115,13 @@ abstract class AbstractController extends Controller
 	 * 'public' groups is set of fields where PK's are not returned, used by default for views returned.
 	 *
 	 * @param Collection $data
-	 * @param int        $status
+	 * @param integer    $status
 	 * @param array      $headers
 	 * @param array      $context
 	 *
 	 * @return JsonResponse
 	 */
-	protected function createResponse(Collection $data, $status = 200, array $headers = array(), array $context = array('groups' => array('public'))): JsonResponse
+	protected function createResponse(Collection $data, $status = 200, array $headers = [], array $context = ['groups' => ['public']]): JsonResponse
 	{
 		return $this->json($this->getResponseData($data), $status, $headers, $context);
 	}
