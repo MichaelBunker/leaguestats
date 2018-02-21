@@ -56,6 +56,9 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
+    "e-moe/guzzle6-bundle": {
+        "version": "v1.2.2"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {
@@ -67,6 +70,15 @@
     },
     "eloquent/enumeration": {
         "version": "5.1.1"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -85,6 +97,9 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"

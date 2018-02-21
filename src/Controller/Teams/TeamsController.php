@@ -24,6 +24,9 @@ class TeamsController extends AbstractController
 	 */
 	public function getTeams(Criteria $criteria): JsonResponse
 	{
+		$model = $this->get('App\Integration\Esports\Model\Esports');
+
+		dump($model->read($criteria));
 		return $this->getAction($criteria);
 	}
 }

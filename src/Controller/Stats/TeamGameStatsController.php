@@ -13,17 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TeamGameStatsController extends AbstractController
 {
-    const ENTITY = TeamGameStats::class;
+	const ENTITY = TeamGameStats::class;
 
-    /**
-     * @Route("/team/game/stats", name="team_game_stats")
-     *
-     * @param Criteria $criteria
-     *
-     * @return JsonResponse
-     */
-    public function getTeamGameStats(Criteria $criteria): JsonResponse
-    {
-        return $this->getAction($criteria);
-    }
+	/**
+	 * @Route("/team/game/stats", name="team_game_stats")
+	 *
+	 * @param Criteria $criteria
+	 *
+	 * @return JsonResponse
+	 */
+	public function getTeamGameStats(Criteria $criteria): JsonResponse
+	{
+		return $this->getAction($criteria);
+	}
 }

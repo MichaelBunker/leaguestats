@@ -6,7 +6,11 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-
+        bind:
+            # pass this value to any $adminEmail argument for any service
+            # that's defined in this file (including controller arguments)
+            $client: '@leaguestats.esports.guzzle.client'
+            $modelSerializer: '@leaguestats.esports.serializer'
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
@@ -26,3 +30,30 @@ services:
             - '@expression.builder'
     expression.builder:
         class: Doctrine\Common\Collections\ExpressionBuilder
+
+    App\Integration\Esports\Model\Esports:
+        public: true
+    App\Integration\Esports\Esports:
+        calls:
+            - [setLogger, ['@monolog.logger.php']]
+    leaguestats.esports.guzzle.client:
+        class: GuzzleHttp\Client
+        arguments:
+            -
+                base_uri: 'https://acs.leagueoflegends.com'
+                verify:   false
+                exceptions: false
+        tags:
+            - { name: guzzle.client }
+
+    leaguestats.esports.serializer:
+        class: Symfony\Component\Serializer\Serializer
+        arguments:
+            -
+                - '@leaguestats.serializer.normalizer.object'
+            -
+                - '@leaguestats.serializer.encoder.json'
+    leaguestats.serializer.normalizer.object:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+    leaguestats.serializer.encoder.json:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
