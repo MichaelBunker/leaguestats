@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Enum\HttpEnum;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -86,9 +87,9 @@ abstract class AbstractController extends Controller
 	 *
 	 * @param Criteria $criteria
 	 *
-	 * @return array
+	 * @return Collection
 	 */
-	protected function fetchRecords(Criteria $criteria)
+	protected function fetchRecords(Criteria $criteria): Collection
 	{
 		return $this->getDoctrine()->getRepository($this::ENTITY)->matching($criteria);
 	}
@@ -113,14 +114,14 @@ abstract class AbstractController extends Controller
 	 *
 	 * 'public' groups is set of fields where PK's are not returned, used by default for views returned.
 	 *
-	 * @param mixed $data
-	 * @param int   $status
-	 * @param array $headers
-	 * @param array $context
+	 * @param Collection $data
+	 * @param int        $status
+	 * @param array      $headers
+	 * @param array      $context
 	 *
 	 * @return JsonResponse
 	 */
-	protected function createResponse($data, $status = 200, array $headers = array(), array $context = array('groups' => array('public'))): JsonResponse
+	protected function createResponse(Collection $data, $status = 200, array $headers = array(), array $context = array('groups' => array('public'))): JsonResponse
 	{
 		return $this->json($this->getResponseData($data), $status, $headers, $context);
 	}
@@ -128,11 +129,11 @@ abstract class AbstractController extends Controller
 	/**
 	 * Get response data.
 	 *
-	 * @param $data
+	 * @param Collection $data
 	 *
 	 * @return array
 	 */
-	protected function getResponseData($data): array
+	protected function getResponseData(Collection $data): array
 	{
 		return [
 			'count' => count($data),
