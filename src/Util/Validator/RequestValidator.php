@@ -3,7 +3,6 @@
 namespace App\Util\Validator;
 
 use App\Util\ValueConverter\ConverterManager;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\HttpFoundation\Request;
@@ -200,22 +199,6 @@ class RequestValidator
 	 */
 	protected function setValidatorValues($validatorClass, $objType, $value, $field)
 	{
-		switch ($objType) {
-			case $objType == Type::STRING:
-				$validatorClass->$field = $this->converterManager->convert(Type::STRING, $value);
-				break;
-
-			case $objType == Type::INTEGER:
-				$validatorClass->$field = $this->converterManager->convert(Type::INTEGER, $value);
-				break;
-
-			case $objType == Type::FLOAT:
-				$validatorClass->$field = $this->converterManager->convert(Type::FLOAT, $value);
-				break;
-
-			case $objType == Type::BOOLEAN:
-				$validatorClass->$field = $this->converterManager->convert(Type::BOOLEAN, $value);
-				break;
-		}
+		$validatorClass->$field = $this->converterManager->convert($objType, $value);
 	}
 }
