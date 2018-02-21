@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Enum\HttpEnum;
-use App\Util\Visitor\RequestVisitor;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -19,124 +18,126 @@ use Symfony\Component\HttpFoundation\Response;
  */
 abstract class AbstractController extends Controller
 {
-    /**
-     * Entity class for records, overridden in concrete controllers.
-     */
-    const ENTITY = '';
+	/**
+	 * Entity class for records, overridden in concrete controllers.
+	 */
+	const ENTITY = '';
 
-    /**
-     * Get action.
-     *
-     * @param Request $request
-     *
-     * @return JsonResponse
-     */
-    public function getAction(Request $request): JsonResponse
-    {
-        $criteria = $this->createCriteria($request);
-        $records  = $this->fetchRecords($criteria);
+	/**
+	 * Get action.
+	 *
+	 * @param Request $request
+	 *
+	 * @return JsonResponse
+	 */
+	public function getAction(Request $request): JsonResponse
+	{
+		$criteria = $this->createCriteria($request);
+		$records  = $this->fetchRecords($criteria);
 
-        return $this->createResponse($records, Response::HTTP_OK, ['Access-Control-Allow-Origin' => '*']);
-    }
+		return $this->createResponse($records, Response::HTTP_OK, ['Access-Control-Allow-Origin' => '*']);
+	}
 
-    /**
-     * Put action.
-     *
-     * @param Criteria $criteria
-     * @param mixed    $record
-     *
-     * @throws HttpException Put method isn't implemented.
-     *
-     * @return void
-     */
-    public function putAction(Criteria $criteria, $record)
-    {
-        throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::PUT));
-    }
+	/**
+	 * Put action.
+	 *
+	 * @param Criteria $criteria
+	 * @param mixed    $record
+	 *
+	 * @throws HttpException Put method isn't implemented.
+	 *
+	 * @return void
+	 */
+	public function putAction(Criteria $criteria, $record)
+	{
+		throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::PUT));
+	}
 
-    /**
-     * Post action.
-     *
-     * @param mixed $record
-     *
-     * @throws HttpException Post method isn't implemented.
-     *
-     * @return void
-     */
-    public function postAction($record)
-    {
-        throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::POST));
-    }
+	/**
+	 * Post action.
+	 *
+	 * @param mixed $record
+	 *
+	 * @throws HttpException Post method isn't implemented.
+	 *
+	 * @return void
+	 */
+	public function postAction($record)
+	{
+		throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::POST));
+	}
 
-    /**
-     * Delete action.
-     *
-     * @param mixed $record
-     *
-     * @throws HttpException Delete method isn't implemented.
-     *
-     * @return void
-     */
-    public function deleteAction($record)
-    {
-        throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::DELETE));
-    }
+	/**
+	 * Delete action.
+	 *
+	 * @param mixed $record
+	 *
+	 * @throws HttpException Delete method isn't implemented.
+	 *
+	 * @return void
+	 */
+	public function deleteAction($record)
+	{
+		throw new HttpException(Response::HTTP_NOT_IMPLEMENTED, sprintf('%s method is not implemented', HttpEnum::DELETE));
+	}
 
-    /**
-     * Fetch records.
-     *
-     * @param Criteria $criteria
-     *
-     * @return array
-     */
-    protected function fetchRecords(Criteria $criteria)
-    {
-        return $this->getDoctrine()->getRepository($this::ENTITY)->matching($criteria);
-    }
+	/**
+	 * Fetch records.
+	 *
+	 * @param Criteria $criteria
+	 *
+	 * @return array
+	 */
+	protected function fetchRecords(Criteria $criteria)
+	{
+		return $this->getDoctrine()->getRepository($this::ENTITY)->matching($criteria);
+	}
 
-    /**
-     * Create Criteria object for request.
-     *
-     * @param Request $request
-     *
-     * @return Criteria
-     */
-    protected function createCriteria(Request $request): Criteria
-    {
-        /** @var \App\Util\Visitor\RequestVisitor $requestVisitor */
-        $requestVisitor = $this->get('App\Util\Visitor\RequestVisitor');
+	/**
+	 * Create Criteria object for request.
+	 *
+	 * @param Request $request
+	 *
+	 * @return Criteria
+	 */
+	protected function createCriteria(Request $request): Criteria
+	{
+		/** @var \App\Util\Visitor\RequestVisitor $requestVisitor */
+		$requestVisitor = $this->get('App\Util\Visitor\RequestVisitor');
 
-        return $requestVisitor->create($request);
-    }
+		return $requestVisitor->create($request);
+	}
 
-    /**
-     * Create json response.
-     *
-     * @param mixed $data
-     * @param int   $status
-     * @param array $headers
-     * @param array $context
-     *
-     * @return JsonResponse
-     */
-    protected function createResponse($data, $status = 200, array $headers = array(), array $context = array()): JsonResponse
-    {
-        return $this->json($this->getResponseData($data), $status, $headers, array('groups' => array('public'))); //'public' is group without PK's returned
-    }
+	/**
+	 * Create json response.
+	 *
+	 * 'public' groups is set of fields where PK's are not returned, used by default for views returned.
+	 *
+	 * @param mixed $data
+	 * @param int   $status
+	 * @param array $headers
+	 * @param array $context
+	 *
+	 * @return JsonResponse
+	 */
+	protected function createResponse($data, $status = 200, array $headers = array(), array $context = array('groups' => array('public'))): JsonResponse
+	{
+		return $this->json($this->getResponseData($data), $status, $headers, $context);
+	}
 
-    /**
-     * Get response data.
-     *
-     * @param $data
-     *
-     * @return array
-     */
-    protected function getResponseData($data): array
-    {
-        return [
-            'count' => count($data),
-            'results' => $data,
-            'success' => true
-        ];
-    }
+	/**
+	 * Get response data.
+	 *
+	 * @param $data
+	 *
+	 * @return array
+	 */
+	protected function getResponseData($data): array
+	{
+		return [
+			'count' => count($data),
+			'results' => $data,
+			'success' => true
+		];
+	}
 }
