@@ -26,6 +26,10 @@
     <filter>
         <whitelist>
             <directory>./src/</directory>
+            <exclude>
+                <directory>./src/Entity/</directory>
+                <directory>./src/Validator/*</directory>
+            </exclude>
         </whitelist>
     </filter>
 
