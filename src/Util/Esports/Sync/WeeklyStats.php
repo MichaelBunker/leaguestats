@@ -6,6 +6,7 @@ use App\Entity\Champions;
 use App\Entity\Games;
 use App\Entity\Matches;
 use App\Entity\PlayerGameStats;
+use App\Entity\Players;
 use App\Entity\TeamGameStats;
 use App\Entity\Teams;
 use App\Enum\ChampionIdEnum;
@@ -14,6 +15,7 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\ExpressionBuilder;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 //----------------------------------------------
 //     1 | Team Solo Mid        | TSM      | NA
@@ -51,15 +53,14 @@ class WeeklyStats
 	/**
 	 * WeeklyStats constructor.
 	 *
-	 * @param ModelInterface   $model
-	 * @param EntityManager    $em
-	 * @param ObjectRepository $repository
+	 * @param ModelInterface         $model
+	 * @param EntityManagerInterface $em
 	 */
-	public function __construct(ModelInterface $model, EntityManager $em, ObjectRepository $repository)
+	public function __construct(ModelInterface $model, EntityManagerInterface $em)
 	{
 		$this->model      = $model;
 		$this->em         = $em;
-		$this->repository = $repository;
+		$this->repository = $em->getRepository(Players::class);
 	}
 
 	/**
