@@ -16,7 +16,7 @@ class TeamsController extends AbstractController
 	const ENTITY = Teams::class;
 
 	/**
-	 * @Route("/teams", name="teams")
+	 * @Route("/teams", name="teams", methods="GET")
 	 *
 	 * @param Criteria $criteria
 	 *

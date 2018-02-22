@@ -16,7 +16,7 @@ class MatchesController extends AbstractController
 	const ENTITY = Matches::class;
 
 	/**
-	 * @Route("/matches", name="matches")
+	 * @Route("/matches", name="matches", methods="GET")
 	 *
 	 * @param Criteria $criteria
 	 *

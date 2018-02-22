@@ -16,7 +16,7 @@ class TeamGameStatsController extends AbstractController
 	const ENTITY = TeamGameStats::class;
 
 	/**
-	 * @Route("/team/game/stats", name="team_game_stats")
+	 * @Route("/team/game/stats", name="team_game_stats", methods="GET")
 	 *
 	 * @param Criteria $criteria
 	 *

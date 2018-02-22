@@ -16,7 +16,7 @@ class GamesController extends AbstractController
 	const ENTITY = Games::class;
 
 	/**
-	 * @Route("/games", name="games")
+	 * @Route("/games", name="games", methods="GET")
 	 *
 	 * @param Criteria $criteria
 	 *
