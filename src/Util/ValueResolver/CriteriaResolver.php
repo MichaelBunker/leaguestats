@@ -2,9 +2,7 @@
 
 namespace App\Util\ValueResolver;
 
-use App\Util\Criteria\Converter;
 use App\Util\Visitor\RequestVisitor;
-use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
@@ -15,11 +13,6 @@ use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 class CriteriaResolver implements ArgumentValueResolverInterface
 {
 	/**
-	 * @var Converter
-	 */
-	protected $criteriaConverter;
-
-	/**
 	 * @var RequestVisitor
 	 */
 	protected $requestVisitor;
@@ -27,13 +20,11 @@ class CriteriaResolver implements ArgumentValueResolverInterface
 	/**
 	 * CriteriaResolver constructor.
 	 *
-	 * @param Converter      $converter
 	 * @param RequestVisitor $requestVisitor
 	 */
-	public function __construct(Converter $converter, RequestVisitor $requestVisitor)
+	public function __construct(RequestVisitor $requestVisitor)
 	{
-		$this->criteriaConverter = $converter;
-		$this->requestVisitor    = $requestVisitor;
+		$this->requestVisitor = $requestVisitor;
 	}
 
 	/**
@@ -59,20 +50,6 @@ class CriteriaResolver implements ArgumentValueResolverInterface
 	 */
 	public function resolve(Request $request, ArgumentMetadata $argument)
 	{
-		yield $this->createNewCriteria($request);
-	}
-
-	/**
-	 * Create a criteria from a request object.
-	 *
-	 * @param Request $request
-	 *
-	 * @return Criteria
-	 */
-	protected function createNewCriteria(Request $request): Criteria
-	{
-		$criteria = $this->requestVisitor->create($request);
-
-		return $this->criteriaConverter->convert($criteria, 'player', ['name']);
+		yield $this->requestVisitor->create($request);
 	}
 }

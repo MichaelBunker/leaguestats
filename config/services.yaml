@@ -57,3 +57,6 @@ services:
         class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
     leaguestats.serializer.encoder.json:
         class: Symfony\Component\Serializer\Encoder\JsonEncoder
+    App\Util\Criteria\Converter:
+        public: true
+        class: App\Util\Criteria\Converter
