@@ -24,6 +24,21 @@ class MatchesController extends AbstractController
 	 */
 	public function getMatches(Criteria $criteria): JsonResponse
 	{
-		return $this->getAction($criteria);
+		return $this->getAction($this->convertCriteria($criteria));
+	}
+
+	/**
+	 * Create criteria.
+	 *
+	 * @param Criteria $criteria
+	 *
+	 * @return Criteria
+	 */
+	protected function convertCriteria(Criteria $criteria): Criteria
+	{
+		/** @var \App\Util\Criteria\Converter $service */
+		$service = $this->get('App\Util\Criteria\Converter');
+
+		return $service->convert($criteria, 'team', ['winner', 'loser']);
 	}
 }

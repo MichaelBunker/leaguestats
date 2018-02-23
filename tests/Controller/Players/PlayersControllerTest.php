@@ -17,9 +17,16 @@ class PlayersControllerTest extends TestCase
 	 */
 	public function testGetTeams()
 	{
-		$response = $this->createMock(JsonResponse::class);
-		$criteria = $this->createMock(Criteria::class);
-		$controller = $this->createPartialMock(PlayersController::class, ['getAction']);
+		$response           = $this->createMock(JsonResponse::class);
+		$criteria           = $this->createMock(Criteria::class);
+		$convertCriteria    = $this->createMock(Criteria::class);
+		$controller         = $this->createPartialMock(PlayersController::class, ['getAction', 'convertCriteria']);
+
+		$controller
+			->expects($this->once())
+			->method('convertCriteria')
+			->with($criteria)
+			->willReturn($convertCriteria);
 
 		$controller
 			->expects($this->once())
