@@ -53,9 +53,9 @@ class Esports implements ModelInterface
 	 */
 	public function read(Criteria $criteria): ArrayCollection
 	{
-//		$resource = $this->getResource($criteria);
+		$resource = $this->getResource($criteria);
 
-		$response = $this->integration->get('/v1/stats/game/TRLH1/1002440106?gameHash=d6441d4ec8f87534');
+		$response = $this->integration->get($resource);
 		$data     = $this->denormalizeData($response);
 
 		return new ArrayCollection([$data]);
