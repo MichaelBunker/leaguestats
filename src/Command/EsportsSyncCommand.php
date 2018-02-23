@@ -19,7 +19,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class EsportsSyncCommand extends Command
 {
+	/**
+	 * @var string
+	 */
 	protected static $defaultName = 'esports-sync';
+
 	/**
 	 * @var WeeklyStats
 	 */
@@ -29,14 +33,26 @@ class EsportsSyncCommand extends Command
 	 * @var EntityManagerInterface
 	 */
 	protected $em;
-
+// phpcs:disable
+	/**
+	 * EsportsSyncCommand constructor.
+	 *
+	 * @param string                 $name
+	 * @param WeeklyStats            $weeklyStats
+	 * @param EntityManagerInterface $em
+	 */
 	public function __construct($name = null, WeeklyStats $weeklyStats, EntityManagerInterface $em)
 	{
 		parent::__construct($name);
 		$this->weeklyStats = $weeklyStats;
-		$this->em = $em;
+		$this->em          = $em;
 	}
-
+// phpcs:enable
+	/**
+	 * Configure command.
+	 *
+	 * @return void
+	 */
 	protected function configure()
 	{
 		$this
@@ -47,6 +63,14 @@ class EsportsSyncCommand extends Command
 			->addOption('resource', 'rsrc', InputOption::VALUE_REQUIRED);
 	}
 
+	/**
+	 * Execute command.
+	 *
+	 * @param InputInterface  $input
+	 * @param OutputInterface $output
+	 *
+	 * @return void
+	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$io = new SymfonyStyle($input, $output);
