@@ -3,6 +3,7 @@
 namespace App\Util\Validator;
 
 use App\Util\ValueConverter\ConverterManager;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -78,7 +79,7 @@ class RequestValidator
 	 */
 	protected function validateFields(ClassMetadata $classMetadata, Request $request)
 	{
-		$entityFields  = $classMetadata->getFieldNames();
+		$entityFields  = array_merge($classMetadata->getFieldNames(), $classMetadata->getAssociationNames());
 		$requestFields = array_keys($request->query->all());
 
 		foreach ($requestFields as $field) {
@@ -125,12 +126,24 @@ class RequestValidator
 	{
 		$values = $arguments->all();
 		$fields = $classMetadata->getFieldNames();
+		$assocs = $classMetadata->getAssociationNames();
 
 		foreach ($fields as $field) {
 			if (isset($values[$field])) {
 				$value = $values[$field];
 				$type  = $classMetadata->getFieldMapping($field)['type'];
 
+				if ($this->isComplexComparison($value)) {
+					$value = $this->getComparisonValue($value);
+				}
+
+				$this->setValidatorValues($validatorClass, $type, $value, $field);
+			}
+		}
+		foreach ($assocs as $field) {
+			if (isset($values[$field])) {
+				$value = $values[$field];
+				$type  = Type::STRING; //Can make this assumption for associations.
 				if ($this->isComplexComparison($value)) {
 					$value = $this->getComparisonValue($value);
 				}
