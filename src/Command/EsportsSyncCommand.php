@@ -79,7 +79,7 @@ class EsportsSyncCommand extends Command
 		$redTeam    = $repository->findOneBy(['abbr' => $input->getOption('redTeam')]);
 		$blueTeam   = $repository->findOneBy(['abbr' => $input->getOption('blueTeam')]);
 
-		$this->weeklyStats($input->getOption('resource'), $blueTeam, $redTeam, new \DateTime($input->getOption('resource')));
+		$this->weeklyStats->getWeeklyStats($input->getOption('resource'), $blueTeam, $redTeam, new \DateTime($input->getOption('date')));
 
 		$io->success(sprintf('Stats Synced for given match between %s and %s', $redTeam->getAbbr(), $blueTeam->getAbbr()));
 	}
