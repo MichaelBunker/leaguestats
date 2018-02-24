@@ -121,7 +121,8 @@ abstract class AbstractController extends Controller
 		return [
 			'count' => count($data),
 			'results' => $data,
-			'success' => true
+			'success' => true,
+			'messages' => []
 		];
 	}
 }
