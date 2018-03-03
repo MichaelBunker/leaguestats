@@ -151,8 +151,8 @@ class WeeklyStats
 			$player = null;
 			foreach ($participantIds as $pid) {
 				if ($pid->participantId == $participant->participantId) {
-					$sumName = explode(' ', $pid->player->summonerName)[1];
-					$player  = $this->repository->findOneByName($sumName);
+					$sumName = explode(' ', $pid->player->summonerName, 2)[1];
+					$player  = $this->repository->findOneByName(strtolower($sumName));
 					break;
 				}
 			}
