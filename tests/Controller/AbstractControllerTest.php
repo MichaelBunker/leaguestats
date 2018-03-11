@@ -162,9 +162,10 @@ class AbstractControllerTest extends TestCase
 		$collection = new ArrayCollection(['foo', 'bar']);
 		$accessor = new Proxy($this->createPartialMock(AbstractController::class, []));
 		$result = [
-			'count'   => 2,
-			'results' => $collection,
-			'success' => true
+			'count'    => 2,
+			'results'  => $collection,
+			'success'  => true,
+			'messages' => []
 		];
 		$this->assertEquals(
 			$result,
