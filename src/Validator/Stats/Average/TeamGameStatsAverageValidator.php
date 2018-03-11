@@ -34,10 +34,12 @@ class TeamGameStatsAverageValidator
 	 * @Assert\Type("float")
 	 */
 	public $deaths;
+
 	/**
 	 * @Assert\Type("float")
 	 */
 	public $wardsPlaced;
+
 	/**
 	 * @Assert\Type("float")
 	 */

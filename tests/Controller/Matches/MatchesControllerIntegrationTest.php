@@ -55,7 +55,7 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	/**
 	 * Test GET /matches with query param.
 	 */
-	public function testGetMatchesWithQueryNoReuslts()
+	public function testGetMatchesWithQueryNoResults()
 	{
 		$client = static::createClient();
 		$client->request('GET', '/matches?winner=asdflkjafdasf');
