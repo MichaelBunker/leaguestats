@@ -46,7 +46,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 	protected function getResponseObject(GetResponseForExceptionEvent $event)
 	{
 		$exception = $event->getException();
-		$code      = $exception->getCode() == 0 ? 500 : $exception->getCode();
+		$code      = !$exception->getStatusCode() ? 500 : $exception->getStatusCode();
 		$response  = new JsonResponse(
 			[
 				'count'    => 0,
