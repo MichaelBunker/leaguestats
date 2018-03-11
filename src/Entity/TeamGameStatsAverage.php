@@ -6,13 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * Entity for TeamGameStatsAverage.
+ * Entity for TeamGameStatsAverage view.
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="stats.team_game_stats_average")
  */
 class TeamGameStatsAverage
 {
 	/**
 	 * Team.
 	 *
+	 * @ORM\Id
 	 * @Groups({"public"})
 	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
 	 * @ORM\JoinColumns({
@@ -22,18 +26,10 @@ class TeamGameStatsAverage
 	private $team;
 
 	/**
-	 * First Blood.
-	 *
-	 * @Groups({"public"})
-	 * @ORM\Column(type="boolean")
-	 */
-	private $firstBlood;
-
-	/**
 	 * Win percentage.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $winPercentage;
 
@@ -41,7 +37,7 @@ class TeamGameStatsAverage
 	 * Average kills per game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $kills;
 
@@ -49,7 +45,7 @@ class TeamGameStatsAverage
 	 * Average assists per game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $assists;
 
@@ -57,7 +53,7 @@ class TeamGameStatsAverage
 	 * Average deaths per game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $deaths;
 
@@ -65,7 +61,7 @@ class TeamGameStatsAverage
 	 * Average wards placed per game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $wardsPlaced;
 
@@ -73,7 +69,7 @@ class TeamGameStatsAverage
 	 * Average damage dealt per game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="float")
 	 */
 	private $damageDealt;
 
