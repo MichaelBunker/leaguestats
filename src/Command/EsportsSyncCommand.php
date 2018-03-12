@@ -73,7 +73,7 @@ class EsportsSyncCommand extends Command
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$io = new SymfonyStyle($input, $output);
+		$io = $this->getSymfonyIO($input, $output);
 
 		$repository = $this->em->getRepository(Teams::class);
 		$redTeam    = $repository->findOneBy(['abbr' => $input->getOption('redTeam')]);
@@ -82,5 +82,18 @@ class EsportsSyncCommand extends Command
 		$this->weeklyStats->getWeeklyStats($input->getOption('resource'), $blueTeam, $redTeam, new \DateTime($input->getOption('date')));
 
 		$io->success(sprintf('Stats Synced for given match between %s and %s', $redTeam->getAbbr(), $blueTeam->getAbbr()));
+	}
+
+	/**
+	 * Get SymfonyStyle instance.
+	 *
+	 * @param InputInterface  $input
+	 * @param OutputInterface $output
+	 *
+	 * @return SymfonyStyle
+	 */
+	protected function getSymfonyIO(InputInterface $input, OutputInterface $output)
+	{
+		return new SymfonyStyle($input, $output);
 	}
 }
