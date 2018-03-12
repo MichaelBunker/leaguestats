@@ -1,23 +1,23 @@
 <?php
 
-namespace tests\Controller\Matches;
+namespace tests\Controller\Players;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class MatchesControllerTest.
+ * Class PlayersControllerIntegrationTest.
  */
-class MatchesControllerIntegrationTest extends WebTestCase
+class PlayersControllerIntegrationTest extends WebTestCase
 {
 	/**
-	 * Test GET requests to the /matches endpoint.
+	 * Test GET requests to the /players endpoint.
 	 */
-	public function testGetmatches()
+	public function testGetPlayers()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches');
+		$client->request(Request::METHOD_GET, '/players');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -32,12 +32,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /players with query param.
 	 */
-	public function testGetMatchesWithQuery()
+	public function testGetPlayersWithQuery()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=TSM');
+		$client->request(Request::METHOD_GET, '/players?name=bjergsen');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -54,12 +54,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /players with query param.
 	 */
-	public function testGetMatchesWithQueryNoResults()
+	public function testGetPlayersWithQueryNoResults()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=asdflkjafdasf');
+		$client->request(Request::METHOD_GET, '/players?name=asdflkjafdasf');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -75,12 +75,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param for invalid field.
+	 * Test GET /players with query param for invalid field.
 	 */
-	public function testGetMatchesInvalidQueryField()
+	public function testGetPlayersInvalidQueryField()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?foo=TSM');
+		$client->request(Request::METHOD_GET, '/players?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
@@ -97,12 +97,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test POST /matches
+	 * Test POST /players
 	 */
-	public function testPostMatches()
+	public function testPostPlayers()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_POST, '/matches?foo=TSM');
+		$client->request(Request::METHOD_POST, '/players?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -119,12 +119,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test DELETE /matches
+	 * Test DELETE /players
 	 */
-	public function testDeleteMatches()
+	public function testDeletePlayers()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_DELETE, '/matches?foo=TSM');
+		$client->request(Request::METHOD_DELETE, '/players?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -141,12 +141,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test PUT /matches
+	 * Test PUT /players
 	 */
-	public function testPutMatches()
+	public function testPutPlayers()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_PUT, '/matches?foo=TSM');
+		$client->request(Request::METHOD_PUT, '/players?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());

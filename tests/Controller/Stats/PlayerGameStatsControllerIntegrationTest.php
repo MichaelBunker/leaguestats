@@ -1,23 +1,23 @@
 <?php
 
-namespace tests\Controller\Matches;
+namespace tests\Controller\Stats;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class MatchesControllerTest.
+ * Class PlayerGameStatsControllerIntegrationTest.
  */
-class MatchesControllerIntegrationTest extends WebTestCase
+class PlayerGameStatsControllerIntegrationTest extends WebTestCase
 {
 	/**
-	 * Test GET requests to the /matches endpoint.
+	 * Test GET requests to the /player/game/stats endpoint.
 	 */
-	public function testGetmatches()
+	public function testGetPlayerGameStats()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches');
+		$client->request(Request::METHOD_GET, '/player/game/stats?player=bjergsen');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -32,12 +32,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /player/game/stats with query param.
 	 */
-	public function testGetMatchesWithQuery()
+	public function testGetPlayerGameStatsWithQuery()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=TSM');
+		$client->request(Request::METHOD_GET, '/player/game/stats?player=bjergsen');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -54,12 +54,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /player/game/stats with query param.
 	 */
-	public function testGetMatchesWithQueryNoResults()
+	public function testGetPlayerGameStatsWithQueryNoResults()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=asdflkjafdasf');
+		$client->request(Request::METHOD_GET, '/player/game/stats?player=asdflkjafdasf');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -75,12 +75,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param for invalid field.
+	 * Test GET /player/game/stats with query param for invalid field.
 	 */
-	public function testGetMatchesInvalidQueryField()
+	public function testGetPlayerGameStatsInvalidQueryField()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?foo=TSM');
+		$client->request(Request::METHOD_GET, '/player/game/stats?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
@@ -97,12 +97,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test POST /matches
+	 * Test POST /player/game/stats
 	 */
-	public function testPostMatches()
+	public function testPostPlayerGameStats()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_POST, '/matches?foo=TSM');
+		$client->request(Request::METHOD_POST, '/player/game/stats?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -119,12 +119,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test DELETE /matches
+	 * Test DELETE /player/game/stats
 	 */
-	public function testDeleteMatches()
+	public function testDeletePlayerGameStats()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_DELETE, '/matches?foo=TSM');
+		$client->request(Request::METHOD_DELETE, '/player/game/stats?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -141,12 +141,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test PUT /matches
+	 * Test PUT /player/game/stats
 	 */
-	public function testPutMatches()
+	public function testPutPlayerGameStats()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_PUT, '/matches?foo=TSM');
+		$client->request(Request::METHOD_PUT, '/player/game/stats?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());

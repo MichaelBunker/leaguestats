@@ -1,23 +1,23 @@
 <?php
 
-namespace tests\Controller\Matches;
+namespace tests\Controller\Stats\Average;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class MatchesControllerTest.
+ * Class TeamGameStatsAverageControllerIntegrationTest.
  */
-class MatchesControllerIntegrationTest extends WebTestCase
+class TeamGameStatsAverageControllerIntegrationTest extends WebTestCase
 {
 	/**
-	 * Test GET requests to the /matches endpoint.
+	 * Test GET requests to the /team/game/stats/average endpoint.
 	 */
-	public function testGetmatches()
+	public function testGetTeamGameStatsAverage()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches');
+		$client->request(Request::METHOD_GET, '/team/game/stats/average?team=bjergsen');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -32,12 +32,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /team/game/stats/average with query param.
 	 */
-	public function testGetMatchesWithQuery()
+	public function testGetTeamGameStatsAverageWithQuery()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=TSM');
+		$client->request(Request::METHOD_GET, '/team/game/stats/average?team=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -54,12 +54,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param.
+	 * Test GET /team/game/stats/average with query param.
 	 */
-	public function testGetMatchesWithQueryNoResults()
+	public function testGetTeamGameStatsAverageWithQueryNoResults()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?winner=asdflkjafdasf');
+		$client->request(Request::METHOD_GET, '/team/game/stats/average?team=asdflkjafdasf');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
@@ -75,12 +75,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test GET /matches with query param for invalid field.
+	 * Test GET /team/game/stats/average with query param for invalid field.
 	 */
-	public function testGetMatchesInvalidQueryField()
+	public function testGetTeamGameStatsAverageInvalidQueryField()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_GET, '/matches?foo=TSM');
+		$client->request(Request::METHOD_GET, '/team/game/stats/average?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
@@ -97,12 +97,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test POST /matches
+	 * Test POST /team/game/stats/average
 	 */
-	public function testPostMatches()
+	public function testPostTeamGameStatsAverage()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_POST, '/matches?foo=TSM');
+		$client->request(Request::METHOD_POST, '/team/game/stats/average?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -119,12 +119,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test DELETE /matches
+	 * Test DELETE /team/game/stats/average
 	 */
-	public function testDeleteMatches()
+	public function testDeleteTeamGameStatsAverage()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_DELETE, '/matches?foo=TSM');
+		$client->request(Request::METHOD_DELETE, '/team/game/stats/average?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
@@ -141,12 +141,12 @@ class MatchesControllerIntegrationTest extends WebTestCase
 	}
 
 	/**
-	 * Test PUT /matches
+	 * Test PUT /team/game/stats/average
 	 */
-	public function testPutMatches()
+	public function testPutTeamGameStatsAverage()
 	{
 		$client = static::createClient();
-		$client->request(Request::METHOD_PUT, '/matches?foo=TSM');
+		$client->request(Request::METHOD_PUT, '/team/game/stats/average?foo=TSM');
 		$response = $client->getResponse();
 
 		$this->assertEquals(Response::HTTP_METHOD_NOT_ALLOWED, $response->getStatusCode());
