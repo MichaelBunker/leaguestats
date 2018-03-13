@@ -47,7 +47,8 @@ class ExceptionSubscriber implements EventSubscriberInterface
 	{
 		$exception = $event->getException();
 		$code      = !$exception->getStatusCode() ? 500 : $exception->getStatusCode();
-		$response  = new JsonResponse(
+
+		return new JsonResponse(
 			[
 				'count'    => 0,
 				'results'  => [],
@@ -60,7 +61,5 @@ class ExceptionSubscriber implements EventSubscriberInterface
 			],
 			$code
 		);
-
-		return $response;
 	}
 }

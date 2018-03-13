@@ -65,23 +65,23 @@ class EsportsSyncCommandTest extends TestCase
 	 */
 	public function testExecute()
 	{
-		$redTeam = $this->createMock(Teams::class);
-		$blueTeam = $this->createMock(Teams::class);
-		$repo = $this->createMock(ObjectRepository::class);
-		$io = $this->createMock(SymfonyStyle::class);
-		$em = $this->createMock(EntityManagerInterface::class);
+		$redTeam     = $this->createMock(Teams::class);
+		$blueTeam    = $this->createMock(Teams::class);
+		$repo        = $this->createMock(ObjectRepository::class);
+		$io          = $this->createMock(SymfonyStyle::class);
+		$em          = $this->createMock(EntityManagerInterface::class);
 		$weeklyStats = $this->createMock(WeeklyStats::class);
-		$input = $this->createMock(InputInterface::class);
-		$output = $this->createMock(OutputInterface::class);
-		$command = $this->createPartialMock(EsportsSyncCommand::class, ['setDescription', 'addOption', 'getSymfonyIO']);
-		$accessor = new Proxy($command);
-		$accessor->em = $em;
+		$input       = $this->createMock(InputInterface::class);
+		$output      = $this->createMock(OutputInterface::class);
+		$command     = $this->createPartialMock(EsportsSyncCommand::class, ['setDescription', 'addOption', 'getSymfonyIO']);
+		$accessor    = new Proxy($command);
+		$accessor->em          = $em;
 		$accessor->weeklyStats = $weeklyStats;
 
-		$redTeamAbbr = 'Hondo';
+		$redTeamAbbr  = 'Hondo';
 		$blueTeamAbbr = 'Havlicek';
-		$date = '2012-01-22';
-		$resource = '/fake/resource';
+		$date         = '2012-01-22';
+		$resource     = '/fake/resource';
 
 		$command
 			->expects($this->once())

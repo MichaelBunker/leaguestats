@@ -9,6 +9,7 @@ use App\Enum\CrudEnum;
 use App\Integration\IntegrationInterface;
 use App\Integration\NotImplementedException;
 use App\Integration\ModelInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\Serializer;
 
 /**
@@ -106,7 +107,7 @@ class Esports implements ModelInterface
 	/**
 	 * Denormalize data.
 	 *
-	 * @param string $data
+	 * @param ResponseInterface $data
 	 *
 	 * @return object
 	 */
