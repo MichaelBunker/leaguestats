@@ -35,7 +35,7 @@ class BooleanConverter implements ConverterInterface
 		if (in_array($data, ['0', 'f', 'false'])) {
 			return false;
 		}
-	}
+	} // @codeCoverageIgnore
 
 	/**
 	 * Check if data can be converted.

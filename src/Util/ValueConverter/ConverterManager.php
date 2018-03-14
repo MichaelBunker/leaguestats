@@ -74,6 +74,6 @@ class ConverterManager
 	{
 		$converters = get_object_vars($this);
 
-		return in_array($type, $converters);
+		return in_array($type, array_keys($converters));
 	}
 }
