@@ -56,6 +56,28 @@ class TeamsControllerIntegrationTest extends WebTestCase
 	/**
 	 * Test GET /teams with query param.
 	 */
+	public function testGetTeamsWithComplexQuery()
+	{
+		$client = static::createClient();
+		$client->request(Request::METHOD_GET, '/teams?abbr=(<>`TSM`)');
+		$response = $client->getResponse();
+
+		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
+		$this->assertContains('count', $response->getContent());
+		$this->assertContains('results', $response->getContent());
+		$this->assertContains('"success":true', $response->getContent());
+		$this->assertNotContains('TSM', $response->getContent());
+		$this->assertTrue(
+			$response->headers->contains(
+				'Content-Type',
+				'application/json'
+			)
+		);
+	}
+
+	/**
+	 * Test GET /teams with query param.
+	 */
 	public function testGetTeamsWithQueryNoResults()
 	{
 		$client = static::createClient();

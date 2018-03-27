@@ -83,6 +83,14 @@ class Matches
 	private $datePlayed;
 
 	/**
+	 * Tie breaker match.
+	 *
+	 * @Groups({"public"})
+	 * @ORM\Column(name="tie_breaker", type="boolean")
+	 */
+	private $tieBreaker;
+
+	/**
 	 * @return mixed
 	 */
 	public function getMatchId()
@@ -208,5 +216,21 @@ class Matches
 	public function setDatePlayed($datePlayed)
 	{
 		$this->datePlayed = $datePlayed;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getTieBreaker()
+	{
+		return $this->tieBreaker;
+	}
+
+	/**
+	 * @param boolean $tieBreaker
+	 */
+	public function setTieBreaker($tieBreaker)
+	{
+		$this->tieBreaker = $tieBreaker;
 	}
 }
