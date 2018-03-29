@@ -94,6 +94,7 @@ class WeeklyStats
 		$match->setDatePlayed($date);
 		$match->setWinner($this->em->find(Teams::class, $winner->teamId));
 		$match->setLoser($this->em->find(Teams::class, $loser->teamId));
+		$match->setTieBreaker(false);
 
 		$this->em->persist($match);
 		$this->em->flush();

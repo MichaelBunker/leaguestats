@@ -91,6 +91,24 @@ class Matches
 	private $tieBreaker;
 
 	/**
+	 * Tournament.
+	 *
+	 * if value exists, this match was played in matching tournament.
+	 *
+	 * @Groups({"public"})
+	 * @ORM\Column(type="integer")
+	 */
+	private $tournament;
+
+	/**
+	 * Split.
+	 *
+	 * @Groups({"public"})
+	 * @ORM\Column(type="string", length=100)
+	 */
+	private $tournamentRound;
+
+	/**
 	 * @return mixed
 	 */
 	public function getMatchId()
@@ -232,5 +250,37 @@ class Matches
 	public function setTieBreaker($tieBreaker)
 	{
 		$this->tieBreaker = $tieBreaker;
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getTournament()
+	{
+		return $this->tournament;
+	}
+
+	/**
+	 * @param integer $tournament
+	 */
+	public function setTournament($tournament)
+	{
+		$this->tournament = $tournament;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTournamentRound()
+	{
+		return $this->tournamentRound;
+	}
+
+	/**
+	 * @param string $tournamentRound
+	 */
+	public function setTournamentRound($tournamentRound)
+	{
+		$this->tournamentRound = $tournamentRound;
 	}
 }
