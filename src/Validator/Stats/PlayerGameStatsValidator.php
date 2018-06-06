@@ -11,7 +11,6 @@ class PlayerGameStatsValidator
 {
 	/**
 	 * @Assert\Type("string")
-	 * @Assert\NotBlank(groups={"GET"})
 	 */
 	public $player;
 
