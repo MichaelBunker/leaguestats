@@ -11,7 +11,6 @@ class TeamGameStatsAverageValidator
 {
 	/**
 	 * @Assert\Type("string")
-	 * @Assert\NotBlank(groups={"GET"})
 	 */
 	public $team;
 
