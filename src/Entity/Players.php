@@ -32,10 +32,8 @@ class Players
 	 * Team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="team_id", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="team_id", referencedColumnName="team_id")
 	 */
 	private $team;
 

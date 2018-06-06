@@ -26,10 +26,8 @@ class Games
 	 * Red team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="red_team", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="red_team", referencedColumnName="team_id")
 	 */
 	private $redTeam;
 
@@ -37,10 +35,8 @@ class Games
 	 * Blue team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="blue_team", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="blue_team", referencedColumnName="team_id")
 	 */
 	private $blueTeam;
 
@@ -56,10 +52,8 @@ class Games
 	 * Winning team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="winner", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="winner", referencedColumnName="team_id")
 	 */
 	private $winner;
 
@@ -67,10 +61,8 @@ class Games
 	 * Match game took place in.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Matches", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="match_id", referencedColumnName="match_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Matches")
+	 * @ORM\JoinColumn(name="match_id", referencedColumnName="match_id")
 	 */
 	private $match;
 

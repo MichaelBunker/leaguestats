@@ -50,7 +50,7 @@ class Matches
 	 * Winner.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
+	 * @ORM\OneToOne(targetEntity="Teams")
 	 * @ORM\JoinColumn(name="winner", referencedColumnName="team_id")
 	 */
 	private $winner;
@@ -59,10 +59,8 @@ class Matches
 	 * Loser.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="loser", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="loser", referencedColumnName="team_id")
 	 */
 	private $loser;
 

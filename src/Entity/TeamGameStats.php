@@ -26,10 +26,8 @@ class TeamGameStats
 	 * Team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Teams", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="team_id", referencedColumnName="team_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\JoinColumn(name="team_id", referencedColumnName="team_id")
 	 */
 	private $team;
 
@@ -37,10 +35,8 @@ class TeamGameStats
 	 * Game.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Games", fetch="EXTRA_LAZY")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="game_id", referencedColumnName="game_id")
-	 * })
+	 * @ORM\OneToOne(targetEntity="Games")
+	 * @ORM\JoinColumn(name="game_id", referencedColumnName="game_id")
 	 */
 	private $game;
 
