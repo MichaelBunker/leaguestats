@@ -46,7 +46,12 @@ class ExceptionSubscriber implements EventSubscriberInterface
 	protected function getResponseObject(GetResponseForExceptionEvent $event)
 	{
 		$exception = $event->getException();
-		$code      = !$exception->getStatusCode() ? 500 : $exception->getStatusCode();
+		$code = method_exists($exception, 'getStatusCode')
+			? $exception->getStatusCode()
+			: 500;
+		$message = method_exists($exception, 'getMessage')
+			? $exception->getMessage()
+			: 'Something went wrong with the request.';
 
 		return new JsonResponse(
 			[
@@ -54,7 +59,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 				'results'  => [],
 				'success'  => false,
 				'messages' => [
-					'exceptionMessage' => $exception->getMessage(),
+					'exceptionMessage' => $message,
 					'exceptionLevel'   => $code,
 					'timestamp'        => time()
 				]
