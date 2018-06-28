@@ -129,6 +129,14 @@ class TeamGameStats
 	private $totalBarons;
 
 	/**
+	 * bans.
+	 *
+	 * @Groups({"public"})
+	 * @ORM\Column(type="array_champions")
+	 */
+	private $bans;
+
+	/**
 	 * @return mixed
 	 */
 	public function getTeamGameStatId()
@@ -350,5 +358,21 @@ class TeamGameStats
 	public function setFirstDrake($firstDrake)
 	{
 		$this->firstDrake = $firstDrake;
+	}
+
+	/**
+	* @param array $bans
+	*/
+	public function getBans()
+	{
+		return $this->bans;
+	}
+
+	/**
+	* @param array $bans
+	*/
+	public function setBans($bans)
+	{
+		$this->bans = $bans;
 	}
 }
