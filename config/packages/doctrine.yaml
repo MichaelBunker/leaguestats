@@ -3,6 +3,8 @@ parameters:
 
 doctrine:
     dbal:
+        types:
+            array_champions:  App\Util\Doctrine\ArrayChampions
         driver: 'pdo_pgsql'
         server_version: '5.7'
         charset: UTF8

@@ -109,6 +109,8 @@ class WeeklyStats
 		$this->em->persist($game);
 		$this->em->flush();
 
+		$champRepo = $this->em->getRepository(Champions::class);
+
 		$teamGameStat = new TeamGameStats();
 		$teamGameStat->setTeam($game->getBlueTeam());
 		$teamGameStat->setGame($game);
@@ -123,6 +125,12 @@ class WeeklyStats
 		$teamGameStat->setTotalDrakes($teams[0]->dragonKills);
 		$teamGameStat->setTotalInhibitors($teams[0]->inhibitorKills);
 		$teamGameStat->setTotalBarons($teams[0]->baronKills);
+		$tempBans = $teams[0]->bans;
+		$bans = [];
+		foreach ($tempBans as $ban) {
+			$bans[] = $champRepo->findOneByLabel(strtolower(ChampionIdEnum::getChampionName($ban->championId)));
+		}
+		$teamGameStat->setBans($bans);
 
 		$teamGameStat1 = new TeamGameStats();
 		$teamGameStat1->setTeam($game->getRedTeam());
@@ -138,6 +146,12 @@ class WeeklyStats
 		$teamGameStat1->setTotalDrakes($teams[1]->dragonKills);
 		$teamGameStat1->setTotalInhibitors($teams[1]->inhibitorKills);
 		$teamGameStat1->setTotalBarons($teams[1]->baronKills);
+		$tempBans1 = $teams[1]->bans;
+		$bans1 = [];
+		foreach ($tempBans1 as $ban) {
+			$bans1[] = $champRepo->findOneByLabel(strtolower(ChampionIdEnum::getChampionName($ban->championId)));
+		}
+		$teamGameStat1->setBans($bans1);
 
 		$this->em->persist($teamGameStat);
 		$this->em->persist($teamGameStat1);
@@ -146,7 +160,6 @@ class WeeklyStats
 
 		$participantIds = $results->getParticipantIdentities();
 		$participants   = $results->getParticipants();
-		$champRepo      = $this->em->getRepository(Champions::class);
 
 		foreach ($participants as $participant) {
 			$player = null;
