@@ -41,7 +41,7 @@ class ArrayChampions extends Type
 		$championArray = [];
 
 		foreach ($array as $champion) {
-			if ($champion instanceof Champions::class) {
+			if ($champion instanceof Champions) {
 				$championArray[] = $champion->getChampionId();
 				continue;
 			}
