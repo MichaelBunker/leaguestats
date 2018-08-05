@@ -32,7 +32,7 @@ class Players
 	 * Team.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\OneToOne(targetEntity="Teams")
+	 * @ORM\ManyToOne(targetEntity="Teams", inversedBy="players")
 	 * @ORM\JoinColumn(name="team_id", referencedColumnName="team_id")
 	 */
 	private $team;
