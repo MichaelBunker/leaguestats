@@ -56,12 +56,19 @@ Some other sample queries.
 ```
 // Get all games under 30 minutes in length.
 http://proleaguestats.com/games?duration<1200
+
 // Get all teams except TSM.
 http://proleaguestats.com/teams?abbr<>TSM
+
 // Get teams with any of the provided names.
 http://proleaguestats.com/teams?abbr=TL|abbr=TSM|abbr=C9
-```
 
+/teams?abbr=TL
+/teams?abbr=TL|abbr=TSM
+/teams?abbr=TL&region=NA
+/teams?abbr<>TL
+
+```
 ## Built With
 
 * [Symfony](https://symfony.com/)
