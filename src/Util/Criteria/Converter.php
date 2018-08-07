@@ -57,6 +57,7 @@ class Converter
 		}
 
 		$fieldFound = false;
+		$type 		= $expressions->getType();
 
 		foreach ($expressions->getExpressionList() as $expr) {
 			if (in_array($expr->getField(), $fields)) {
@@ -73,7 +74,23 @@ class Converter
 			return $criteria;
 		}
 
-		return new Criteria(new CompositeExpression(CompositeExpression::TYPE_AND, $comparisons));
+		return new Criteria($this->createCompositeExpression($comparisons, $type));
+	}
+
+	/**
+	 * Create CompositeExpression.
+	 *
+	 * @param array $comparisons
+	 *
+	 * @return CompositeExpression
+	 */
+	protected function createCompositeExpression(array $comparisons, $join): CompositeExpression
+	{
+		$type = $join == 'OR'
+			? CompositeExpression::TYPE_OR
+			: CompositeExpression::TYPE_AND;
+
+		return new CompositeExpression($type, $comparisons);
 	}
 
 	/**

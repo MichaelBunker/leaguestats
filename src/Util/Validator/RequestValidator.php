@@ -3,6 +3,7 @@
 namespace App\Util\Validator;
 
 use App\Util\ValueConverter\ConverterManager;
+use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -81,10 +82,32 @@ class RequestValidator
 	{
 		$entityFields  = array_merge($classMetadata->getFieldNames(), $classMetadata->getAssociationNames());
 		$requestFields = array_keys($request->query->all());
+		$this->getFields($requestFields);
 
 		foreach ($requestFields as $field) {
 			if (!in_array($field, $entityFields)) {
 				throw new BadRequestHttpException(sprintf('%s is not a valid field', $field));
+			}
+		}
+	}
+
+	protected function getFields(&$requestFields)
+	{
+		foreach ($requestFields as &$field) {
+			if (strpos($field, Comparison::NEQ)) {
+				$queryParts = explode(Comparison::NEQ, $field);
+
+				return $field = $queryParts[0];
+			}
+			if (strpos($field, Comparison::LT)) {
+				$queryParts = explode(Comparison::LT, $field);
+
+				return $field = $queryParts[0];
+			}
+			if (strpos($field, Comparison::GT)) {
+				$queryParts = explode(Comparison::GT, $field);
+
+				return $field = $queryParts[0];
 			}
 		}
 	}
@@ -97,6 +120,8 @@ class RequestValidator
 	 * @param Request       $request
 	 *
 	 * @return void
+	 *
+	 * TODO This isn't working properly. Need to rework how the entire validation section is working.
 	 *
 	 * @throws BadRequestHttpException Validation errors.
 	 */
