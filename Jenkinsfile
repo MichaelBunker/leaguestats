@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                composer install
+                sh "composer install"
             }
         }
     }
