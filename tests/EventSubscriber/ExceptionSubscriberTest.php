@@ -67,11 +67,10 @@ class ExceptionSubscriberTest extends TestCase
 			->willReturn($exception);
 
 		$exception
-			->expects($this->exactly(2))
+			->expects($this->once())
 			->method('getStatusCode')
 			->with()
 			->willReturn(400);
-
 
 		$this->assertInstanceOf(JsonResponse::class, $accessor->getResponseObject($event));
 	}
