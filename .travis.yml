@@ -18,10 +18,7 @@ matrix:
   # Fast finish allows to set the build as "finished" even if the "allow_failures" matrix elements are not finished yet.
   fast_finish: true
   include:
-    - php: 7.0
-    - php: 7.1
-  allow_failures:
-    - php: 7.0
+    - php: 7.2
 
 # Define an environment variable
 env:
@@ -38,11 +35,12 @@ install:
   - cp .env.dist .env
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:create --env=test
-  - php bin/console doctrine:fixtures:load -n --env=test
+  - php bin/console server:start
+  # - php bin/console doctrine:fixtures:load -n --env=test
 
 # Run script
 script:
-  - phpunit
+  - ./vendor/bin/simple-phpunit
 
 # After a build, send email notification with the build results
 notifications:

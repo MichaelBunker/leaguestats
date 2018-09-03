@@ -5,8 +5,10 @@ doctrine:
     dbal:
         types:
             array_champions:  App\Util\Doctrine\ArrayChampions
+        mapping_types:
+            integer[]: integer
         driver: 'pdo_pgsql'
-        server_version: '5.7'
+        server_version: '10.4'
         charset: UTF8
         url: '%env(resolve:DATABASE_URL)%'
     orm:
