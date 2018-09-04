@@ -132,7 +132,7 @@ class TeamGameStats
 	 * bans.
 	 *
 	 * @Groups({"public"})
-	 * @ORM\Column(type="array_champions")
+	 * @ORM\Column(type="array_champions", nullable=true)
 	 */
 	private $bans;
 

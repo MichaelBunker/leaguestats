@@ -19,7 +19,7 @@ class GamesControllerIntegrationTest extends WebTestCase
 		$client = static::createClient();
 		$client->request(Request::METHOD_GET, '/games');
 		$response = $client->getResponse();
-var_dump($response);
+
 		$this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 		$this->assertContains('count', $response->getContent());
 		$this->assertContains('results', $response->getContent());
