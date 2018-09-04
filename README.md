@@ -1,5 +1,7 @@
 # League Stats
 
+[![Build Status](https://travis-ci.org/MichaelBunker/leaguestats.svg?branch=travis)](https://travis-ci.org/MichaelBunker/leaguestats)
+
 An API to display statistics for competitive League of Legends players in the LCS. Hosted at http://proleaguestats.com.
 
 
