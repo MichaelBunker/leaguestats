@@ -111,7 +111,7 @@ class Esports implements ModelInterface
 	 *
 	 * @return object
 	 */
-	protected function denormalizeData($data)
+	protected function denormalizeData(ResponseInterface $data)
 	{
 		$dataJson = json_decode($data->getBody()->getContents());
 

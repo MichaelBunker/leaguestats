@@ -32,6 +32,9 @@
 		<exclude name="Squiz.Commenting.InlineComment"/>
 		<exclude name="Squiz.Commenting.BlockComment.WrongStart"/>
 		<exclude name="Squiz.Commenting.PostStatementComment.Found"/>
+		<exclude name="Squiz.ControlStructures.InlineIfDeclaration.NotSingleLine"/>
+		<exclude name="Squiz.WhiteSpace.OperatorSpacing.SpacingBefore"/>
+		<exclude name="Squiz.ControlStructures.InlineIfDeclaration.SpacingBeforeThen"/>
 	</rule>
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
@@ -54,6 +57,7 @@
 		<exclude name="Generic.Commenting.DocComment.ContentAfterOpen"/>
 		<exclude name="Generic.Commenting.DocComment.ContentAfterOpen"/>
 		<exclude name="Generic.Commenting.DocComment.ContentBeforeClose"/>
+		<exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
 		<exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
 		<exclude name="Zend.NamingConventions.ValidVariableName.ContainsNumbers"/>
 	</rule>

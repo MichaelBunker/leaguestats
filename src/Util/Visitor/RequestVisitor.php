@@ -57,9 +57,9 @@ class RequestVisitor
 	 */
 	protected function createQueryObjects($queryString)
 	{
-		$queries     	= preg_split('/(&|\|)/', $queryString, -1, PREG_SPLIT_DELIM_CAPTURE);
-		$comparisons 	= [];
-		$join 			= null;
+		$queries     = preg_split('/(&|\|)/', $queryString, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$comparisons = [];
+		$join        = null;
 
 		foreach ($queries as $query) {
 			if (strlen($query) == 1) {
@@ -80,6 +80,8 @@ class RequestVisitor
 	 * @param string $query
 	 *
 	 * @return Comparison
+	 *
+	 * @throws BadRequestHttpException When invalid operator given.
 	 */
 	protected function getQueryComparisons($query): Comparison
 	{
@@ -118,7 +120,8 @@ class RequestVisitor
 	/**
 	 * Create CompositeExpression.
 	 *
-	 * @param array $comparisons
+	 * @param array  $comparisons
+	 * @param string $join
 	 *
 	 * @return CompositeExpression
 	 */

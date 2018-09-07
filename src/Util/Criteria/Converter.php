@@ -57,7 +57,7 @@ class Converter
 		}
 
 		$fieldFound = false;
-		$type 		= $expressions->getType();
+		$type       = $expressions->getType();
 
 		foreach ($expressions->getExpressionList() as $expr) {
 			if (in_array($expr->getField(), $fields)) {
@@ -80,7 +80,8 @@ class Converter
 	/**
 	 * Create CompositeExpression.
 	 *
-	 * @param array $comparisons
+	 * @param array  $comparisons
+	 * @param string $join
 	 *
 	 * @return CompositeExpression
 	 */

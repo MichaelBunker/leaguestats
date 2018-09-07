@@ -126,7 +126,8 @@ class WeeklyStats
 		$teamGameStat->setTotalInhibitors($teams[0]->inhibitorKills);
 		$teamGameStat->setTotalBarons($teams[0]->baronKills);
 		$tempBans = $teams[0]->bans;
-		$bans = [];
+		$bans     = [];
+
 		foreach ($tempBans as $ban) {
 			$bans[] = $champRepo->findOneByLabel(strtolower(ChampionIdEnum::getChampionName($ban->championId)));
 		}
@@ -147,7 +148,8 @@ class WeeklyStats
 		$teamGameStat1->setTotalInhibitors($teams[1]->inhibitorKills);
 		$teamGameStat1->setTotalBarons($teams[1]->baronKills);
 		$tempBans1 = $teams[1]->bans;
-		$bans1 = [];
+		$bans1     = [];
+
 		foreach ($tempBans1 as $ban) {
 			$bans1[] = $champRepo->findOneByLabel(strtolower(ChampionIdEnum::getChampionName($ban->championId)));
 		}

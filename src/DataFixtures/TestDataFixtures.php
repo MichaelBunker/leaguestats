@@ -11,44 +11,54 @@ use App\Entity\PlayerGameStats;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Test data fixture for Travis CI builds.
+ */
 class TestDataFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
-    {
-        $tsmTeam = new Teams();
-        $tsmTeam->setOrganization('Team Solo Mid');
-        $tsmTeam->setAbbr('TSM');
-        $tsmTeam->setRegion('NA');
-        $manager->persist($tsmTeam);
+	/**
+	 * Load fixture.
+	 *
+	 * @param ObjectManager $manager
+	 *
+	 * @return void
+	 */
+	public function load(ObjectManager $manager)
+	{
+		$tsmTeam = new Teams();
+		$tsmTeam->setOrganization('Team Solo Mid');
+		$tsmTeam->setAbbr('TSM');
+		$tsmTeam->setRegion('NA');
+		$manager->persist($tsmTeam);
 
-        $tlTeam = new Teams();
-        $tlTeam->setOrganization('Team Liquid');
-        $tlTeam->setAbbr('TL');
-        $tlTeam->setRegion('NA');
-        $manager->persist($tlTeam);
+		$tlTeam = new Teams();
+		$tlTeam->setOrganization('Team Liquid');
+		$tlTeam->setAbbr('TL');
+		$tlTeam->setRegion('NA');
+		$manager->persist($tlTeam);
 
-        $manager->flush();
+		$manager->flush();
 
-        $doubleLift = new Players();
-        $doubleLift->setName('doublelift');
-        $doubleLift->setTeam($tlTeam);
-        $doubleLift->setPosition('ADC');
-        $doubleLift->setActive(true);
+		$doubleLift = new Players();
+		$doubleLift->setName('doublelift');
+		$doubleLift->setTeam($tlTeam);
+		$doubleLift->setPosition('ADC');
+		$doubleLift->setActive(true);
 
-        $bjergsen = new Players();
-        $bjergsen->setName('bjergsen');
-        $bjergsen->setTeam($tsmTeam);
-        $bjergsen->setPosition('Mid');
-        $bjergsen->setActive(true);
+		$bjergsen = new Players();
+		$bjergsen->setName('bjergsen');
+		$bjergsen->setTeam($tsmTeam);
+		$bjergsen->setPosition('Mid');
+		$bjergsen->setActive(true);
 
-        $manager->persist($bjergsen);
-        $manager->persist($doubleLift);
+		$manager->persist($bjergsen);
+		$manager->persist($doubleLift);
 
-        $manager->flush();
+		$manager->flush();
 
-        $date = new \DateTime();
+		$date = new \DateTime();
 
-        $match = new Matches();
+		$match = new Matches();
 		$match->setSeason(1);
 		$match->setWeek(1);
 		$match->setBestOf(1);
@@ -56,9 +66,9 @@ class TestDataFixtures extends Fixture
 		$match->setWinner($tsmTeam);
 		$match->setLoser($tlTeam);
 		$match->setTieBreaker(false);
-        $match->setSplit('Spring');
-        $match->setTournament(0);
-        $match->setTournamentRound(0);
+		$match->setSplit('Spring');
+		$match->setTournament(0);
+		$match->setTournamentRound(0);
 
 		$manager->persist($match);
 		$manager->flush();

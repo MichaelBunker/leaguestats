@@ -1,5 +1,5 @@
 <?php
-
+// phpcs:ignoreFile
 namespace App\Util\Doctrine;
 
 use App\Entity\Champions;

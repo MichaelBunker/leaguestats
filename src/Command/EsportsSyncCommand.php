@@ -87,12 +87,12 @@ class EsportsSyncCommand extends Command
 	/**
 	 * Get SymfonyStyle instance.
 	 *
-	 * @codeCoverageIgnore
-	 *
 	 * @param InputInterface  $input
 	 * @param OutputInterface $output
 	 *
 	 * @return SymfonyStyle
+	 *
+	 * @codeCoverageIgnore
 	 */
 	protected function getSymfonyIO(InputInterface $input, OutputInterface $output)
 	{

@@ -91,7 +91,14 @@ class RequestValidator
 		}
 	}
 
-	protected function getFields(&$requestFields)
+	/**
+	 * Get fields.
+	 *
+	 * @param array $requestFields
+	 *
+	 * @return boolean
+	 */
+	protected function getFields(array &$requestFields)
 	{
 		foreach ($requestFields as &$field) {
 			if (strpos($field, Comparison::NEQ)) {

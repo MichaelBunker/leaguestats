@@ -6,8 +6,6 @@ use Composer\Script\Event;
 
 /**
  * Class CheckStyle to run phpcs fixer on src directory.
- *
- * @codeCoverageIgnore
  */
 class CheckStyle
 {
@@ -17,6 +15,8 @@ class CheckStyle
 	 * @param Event $event
 	 *
 	 * @return void
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public static function execute(Event $event)
 	{

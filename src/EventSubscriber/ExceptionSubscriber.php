@@ -46,7 +46,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 	protected function getResponseObject(GetResponseForExceptionEvent $event)
 	{
 		$exception = $event->getException();
-		$code = method_exists($exception, 'getStatusCode')
+		$code      = method_exists($exception, 'getStatusCode')
 			? $exception->getStatusCode()
 			: 500;
 		$message = method_exists($exception, 'getMessage')
