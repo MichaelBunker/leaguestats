@@ -1,6 +1,6 @@
 # League Stats
 
-An API to display statistics for competitive League of Legends players in the LCS. Hosted at http://proleaguestats.com.
+An API to display statistics for competitive League of Legends players in the LCS.
 
 
 ```
