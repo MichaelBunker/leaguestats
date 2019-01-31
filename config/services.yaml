@@ -29,7 +29,12 @@ services:
             - '@expression.builder'
     expression.builder:
         class: Doctrine\Common\Collections\ExpressionBuilder
-
+#    App\Util\Esports\Sync\WeeklyStats:
+#        public: true
+#        arguments:
+#            - 'App\Integration\Esports\Model\EsportsTimeline'
+    App\Integration\Esports\Model\EsportsTimeline:
+        public: true
     App\Integration\Esports\Model\Esports:
         public: true
     App\Integration\Esports\Esports:

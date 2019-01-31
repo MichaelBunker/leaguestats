@@ -60,7 +60,10 @@ class EsportsSyncCommand extends Command
 			->addOption('redTeam', 'rt', InputOption::VALUE_REQUIRED)
 			->addOption('blueTeam', 'bt', InputOption::VALUE_REQUIRED)
 			->addOption('date', 'd', InputOption::VALUE_REQUIRED)
-			->addOption('resource', 'rsrc', InputOption::VALUE_REQUIRED);
+			->addOption('resource', 'rsrc', InputOption::VALUE_REQUIRED)
+			->addOption('week', 'w', InputOption::VALUE_REQUIRED)
+			->addOption('split', 's', InputOption::VALUE_REQUIRED)
+			->addOption('timeline', 'tl', InputOption::VALUE_REQUIRED);
 	}
 
 	/**
@@ -78,8 +81,10 @@ class EsportsSyncCommand extends Command
 		$repository = $this->em->getRepository(Teams::class);
 		$redTeam    = $repository->findOneBy(['abbr' => $input->getOption('redTeam')]);
 		$blueTeam   = $repository->findOneBy(['abbr' => $input->getOption('blueTeam')]);
-
-		$this->weeklyStats->getWeeklyStats($input->getOption('resource'), $blueTeam, $redTeam, new \DateTime($input->getOption('date')));
+		$week       = $input->getOption('week');
+		$split      = $input->getOption('split');
+		$timeline   = $input->getOption('timeline');
+		$this->weeklyStats->getWeeklyStats($input->getOption('resource'), $blueTeam, $redTeam, new \DateTime($input->getOption('date')), $week, $split, $timeline);
 
 		$io->success(sprintf('Stats Synced for given match between %s and %s', $redTeam->getAbbr(), $blueTeam->getAbbr()));
 	}
